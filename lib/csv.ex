@@ -1,18 +1,19 @@
 defmodule Csv do
   @moduledoc """
-  Documentation for Csv.
+  The Application main module, used to start the main
+  Supervisor module Csv.Supervisor.
   """
+
+  use Application
 
   @doc """
-  Hello world.
-
+  Executed when application starts. It starts the main Supervisor module.
   ## Examples
-
-      iex> Csv.hello
-      :world
-
+    iex> Application.start(:csv)
+    {:error, {:already_started, :csv}}
   """
-  def hello do
-    :world
+
+  def start(_type, _args) do
+    Csv.Supervisor.start_link
   end
 end

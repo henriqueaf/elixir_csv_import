@@ -4,7 +4,6 @@ defmodule Csv.ImportTest do
   alias Csv.Repo
 
   test "imports records of a csv file" do
-    Repo.start_link # This line starts our agent
     options = [schema: Site, headers: [:name, :url], repo: Repo]
 
     "test/fixtures/sites.csv" |> Csv.Import.call(options)

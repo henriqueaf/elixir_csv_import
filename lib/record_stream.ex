@@ -10,7 +10,7 @@ defmodule Csv.RecordStream do
     end
   end
 
-  def valid_headers?(headers, valid_headers) do
+  defp valid_headers?(headers, valid_headers) do
     Enum.sort(headers) == Enum.sort(valid_headers)
   end
 

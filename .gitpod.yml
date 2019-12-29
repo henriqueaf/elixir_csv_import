@@ -1,6 +1,10 @@
 image:
   file: .gitpod.Dockerfile
 
+tasks:
+  - command: mix local.hex --force
+    # command: mix test
+
 vscode:
   extensions:
     - JakeBecker.elixir-ls@0.2.25:X1tqg5Hmluq055QJpf0/7A==

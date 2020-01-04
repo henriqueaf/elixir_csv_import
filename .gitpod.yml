@@ -2,8 +2,7 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - command: mix local.hex --force
-  # command: mix test
+  - init: psql --command "CREATE USER postgres WITH SUPERUSER PASSWORD 'postgres';"
 
 vscode:
   extensions:

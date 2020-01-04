@@ -3,7 +3,7 @@ image:
 
 tasks:
   - command: mix local.hex --force
-    # command: mix test
+  # command: mix test
 
 vscode:
   extensions:

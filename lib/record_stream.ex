@@ -30,6 +30,6 @@ defmodule Csv.RecordStream do
     headers
     |> Enum.zip(row)
     |> Enum.into(%{})
-    |> (fn(contents) -> struct(schema, contents) end).()
+    # |> (fn(contents) -> struct(schema, contents) end).()
   end
 end

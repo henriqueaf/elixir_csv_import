@@ -3,6 +3,7 @@ image:
 
 tasks:
   - init: psql --command "CREATE USER postgres WITH SUPERUSER PASSWORD 'postgres';"
+  - command: psql --command "CREATE USER postgres WITH SUPERUSER PASSWORD 'postgres';" && mix ecto.create && mix ecto.migrate
 
 vscode:
   extensions:

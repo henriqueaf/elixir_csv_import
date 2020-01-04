@@ -1,16 +1,18 @@
 defmodule Csv.ImportTest do
-  use ExUnit.Case
-  alias Csv.FixtureSchemas.Site
-  alias Csv.Repo
+  use Csv.RepoCase, async: true
+  # alias Csv.FixtureSchemas.Site
+  alias Csv.Schemas.BuildingConsent
+  alias Csv.{Repo, Import}
 
+  @tag timeout: :infinity
   test "imports records of a csv file" do
-    options = [schema: Site, headers: [:name, :url], repo: Repo]
+    headers = [:Series_reference, :Period, :Data_value, :Suppressed, :Status, :Units, :Magnitude, :Subject, :Group, :Series_title_1, :Series_title_2, :Series_title_3, :Series_title_4, :Series_title_5]
+    options = [schema: BuildingConsent, headers: headers, repo: Repo]
 
-    "test/fixtures/sites.csv" |> Csv.Import.call(options)
+    "/home/gitpod/large_csv_files/Building consents by region (Monthly).csv" |> Import.call(options)
 
-    assert [
-      %Site{name: "Elixir Language", url: "https://elixir-lang.org"},
-      %Site{name: "Semaphore Blog", url: "https://semaphoreci.com/blog"}
-    ] = Repo.all
+    count = BuildingConsent |> Repo.aggregate(:count, :id)
+    IO.puts "Total: #{inspect count}"
+    assert count > 1
   end
 end

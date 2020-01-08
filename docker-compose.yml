@@ -1,0 +1,39 @@
+version: '3.3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: elixir_csv_import:current
+    container_name: elixir_csv_import_current
+    # this command overrides default CMD on Dockerfile
+    command: >
+      sh ./scripts/config_test.sh
+    # extra_hosts:
+    #   - "postgreshostname:172.17.0.2"
+    # network_mode: bridge # necessary to connect with external service like a runing postgres container
+    # external_links: # connects to an existing runing service (postgres on this case)
+    #   - postgres-11:postgresalias
+    environment:
+      CSV_DATABASE_USER: postgres
+      CSV_DATABASE_PASSWORD: postgres
+      CSV_DATABASE_HOST: db
+    #   MIX_ENV: production
+    volumes:
+      # /elixir_csv_import is the folder created for the application in Dockerfile
+      - .:/elixir_csv_import
+    depends_on:
+      - db
+  db:
+    image: postgres:11-alpine
+    container_name: postgres_csv
+    # restart: unless-stopped
+    volumes:
+      - /home/henriquealmeida/csv_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+# networks:
+#   default:
+#     external:
+#       name: postgres

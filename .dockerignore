@@ -1,0 +1,9 @@
+./.git
+./tmp
+./log
+./node_modules
+./coverage
+./dumps
+*.log
+
+./erl_crash.dump

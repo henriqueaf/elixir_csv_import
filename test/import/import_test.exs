@@ -9,10 +9,10 @@ defmodule Csv.ImportTest do
     headers = [:Series_reference, :Period, :Data_value, :Suppressed, :Status, :Units, :Magnitude, :Subject, :Group, :Series_title_1, :Series_title_2, :Series_title_3, :Series_title_4, :Series_title_5]
     options = [schema: BuildingConsent, headers: headers, repo: Repo]
 
-    "/home/gitpod/large_csv_files/Building consents by region (Monthly).csv" |> Import.call(options)
+    # "/large_csv_files/Building consents by region (Monthly).csv" |> Import.call(options)
+    "test/fixtures/building_consents.csv" |> Import.call(options)
 
     count = BuildingConsent |> Repo.aggregate(:count, :id)
-    IO.puts "Total: #{inspect count}"
-    assert count > 1
+    assert count == 9
   end
 end
